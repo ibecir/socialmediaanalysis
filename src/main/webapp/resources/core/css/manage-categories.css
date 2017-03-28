@@ -1,0 +1,37 @@
+body {
+	background: url('') no-repeat fixed center center;
+	background-size: cover;
+	font-family: Montserrat;
+	background-size: cover;
+}
+
+.logo {
+	width: 213px;
+	height: 100px;
+	background:
+		url('http://icons.iconarchive.com/icons/handdrawngoods/busy/96/people-structure-2-icon.png')
+		no-repeat;
+	margin: 30px auto;
+}
+
+.tocenter {
+	width: 800px;
+	padding: 30px;
+	background: #fff;
+	border-radius: 5px;
+	margin: 0 auto;
+}
+
+.cat {
+	display: none;
+}
+
+.hiddenKeywordId {
+	display: none;
+}
+
+.topmoved{
+	position: fixed;
+	top: 13% !important;
+}
+

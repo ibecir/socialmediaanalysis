@@ -1,0 +1,14 @@
+body {
+	background-size: cover;
+	font-family: Montserrat;
+}
+
+.navbar {
+	font-size: 13px;
+	font-family: Montserrat;
+}
+
+.glyphicon {
+	font-style: bold;
+	font-size: 14px;
+}
