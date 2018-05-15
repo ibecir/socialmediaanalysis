@@ -11,7 +11,6 @@ import ba.ibu.edu.model.DataSource;
 public class Crawler implements Runnable {
 
 	private String user;
-
 	private FacebookDataSource fbDataSource;
 	private CategorizeEngine ce;
 

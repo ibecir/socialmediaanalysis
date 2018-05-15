@@ -47,7 +47,7 @@
 				<li><a href="${home}feeds"><span class="glyphicon glyphicon-comment"></span> Feeds</a></li>
 			</ul>
       		<ul class="nav navbar-nav navbar-right">
-      			<li><a href="http://localhost:8080/socialmediaanalysis/logout"><span class="glyphicon glyphicon-off"></span> Sign Out</a></li>
+      			<li><a href="http://localhost:8080/logout"><span class="glyphicon glyphicon-off"></span> Sign Out</a></li>
       		</ul>
     	</div>
   	</div>

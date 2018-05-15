@@ -1,5 +1,5 @@
 body {
-	background: url('/socialmediaanalysis/resources/img/login-forest.jpg') no-repeat
+	background: url('/resources/img/login-forest.jpg') no-repeat
 		fixed center center;
 	background-size: cover;
 	font-family: Montserrat;
@@ -54,25 +54,25 @@ body {
 }
 
 .login-block input#name {
-	background: #fff url('/socialmediaanalysis/resources/img/login-username.png') 20px
+	background: #fff url('/resources/img/login-username.png') 20px
 		top no-repeat;
 	background-size: 16px 80px;
 }
 
 .login-block input#name:focus {
-	background: #fff url('/socialmediaanalysis/resources/img/login-username.png') 20px
+	background: #fff url('/resources/img/login-username.png') 20px
 		bottom no-repeat;
 	background-size: 16px 80px;
 }
 
 .login-block input#password {
-	background: #fff url('/socialmediaanalysis/resources/img/login-password.png') 20px
+	background: #fff url('/resources/img/login-password.png') 20px
 		top no-repeat;
 	background-size: 16px 80px;
 }
 
 .login-block input#password:focus {
-	background: #fff url('/socialmediaanalysis/resources/img/login-password.png') 20px
+	background: #fff url('/resources/img/login-password.png') 20px
 		bottom no-repeat;
 	background-size: 16px 80px;
 }

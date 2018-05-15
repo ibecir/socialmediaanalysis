@@ -9,24 +9,24 @@
 <head>
 <title>Login</title>
 
-<link href="<c:url value="/resources/css/admin.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/fonts/montserrat.css" />"
-	rel="stylesheet" type='text/css'>
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
-	rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery.min.js" />"></script>
-
+<link href="<c:url value="/resources/css/admin.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/fonts/montserrat.css" />" rel="stylesheet" type='text/css'>
 </head>
 <body>
-	<form action="login" method="get">
+	<form action="login" method="post">
 		<div class="login-block">
 			<h1>Login</h1>
 			<div class="error">${error}</div>
-			<input type="text" placeholder="username" id="name" name="name" /> <input
-				type="password" placeholder="password" id="password" name="password" />
+			<input type="text" placeholder="username" id="name" name="name" /> 
+			<input type="password" placeholder="password" id="password" name="password" />
 
 			<button value="submit" type="submit">Login</button>
+			<div style="padding-top: 8px; padding-bottom: 8px;">
+				<a href="${home}registration" style="color: black; float: right;"><span class=" glyphicon glyphicon-user"></span> Register</a>
+			</div>
 		</div>
 	</form>
 	<script>

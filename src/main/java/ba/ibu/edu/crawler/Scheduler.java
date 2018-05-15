@@ -28,7 +28,7 @@ public class Scheduler {
 
 	
 	public void startCrawler() {
-		System.out.println("Just uncomment");
+		System.out.println("Crawler started from startCrawler method");
 		List<DataSource> allUsers = getAllUsersToCrawl();
 		for (DataSource dataSource : allUsers) {
 			System.out.println("Creating new thread");

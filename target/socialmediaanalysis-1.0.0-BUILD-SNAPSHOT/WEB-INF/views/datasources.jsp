@@ -6,49 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Social Media Analysis</title>
-	
-<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
-<link href="<c:url value="/resources/css/navigation-bar.css" />" rel="stylesheet" type="text/css">
-<link href="<c:url value="/resources/css/manage-categories.css" />" rel="stylesheet" type="text/css">
-<link href="<c:url value="/resources/fonts/montserrat.css" />" rel="stylesheet" type="text/css">
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-
 <body>
-
-								<!-- Navigation Bar -->
-							
-<nav class="navbar navbar-default">
-  	<div class="container-fluid">
-    	<div class="navbar-header">
-      		<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user"></span> Welcome <b>${username}</b></a>
-    		<p id="userID" hidden>${userId}</p>
-    	</div>
-    	<div>
-      		<ul class="nav navbar-nav">
-        		<li ><a href="${baseURL}home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        		<li class="dropdown">
-        			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Manage Categories <span class="caret"></span></a>
-        			<ul class="dropdown-menu" id="manageCategoriesDropdown">
-        				<li id="deletedCategories"><a href="${baseURL}deleted-categories?baseURL=${baseURL}&username=${username}&userId=${userId}">Deleted Categories</a></li>
-        				<li ><a href="${baseURL}active-categories?baseURL=${baseURL}&username=${username}&userId=${userId}">Manage Categories</a></li>
-        			</ul>
-        		</li>
-        		<li><a href="${baseURL}my-categories"><span class="glyphicon glyphicon-signal"></span> My Categories</a></li>
-				<li><a href="${baseURL}datasources?baseURL=${baseURL}&username=${username}&userId=${userId}"><span class="glyphicon glyphicon-cloud"></span> My Pages</a></li>
-			</ul>
-      		<ul class="nav navbar-nav navbar-right">
-      			<li><a href="#"><span class="glyphicon glyphicon-off"></span> Sign Out</a></li>
-      		</ul>
-    	</div>
-  	</div>
-</nav>
-
 								<!-- Main Table -->
 
 <div class="tocenter">
@@ -57,18 +17,14 @@
 		Add Page
 		</button>
 	<div class="btn-group">
-		<button id="dropDownButton" class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Facebook <span class="caret"></span></button>
-  			<ul class="dropdown-menu" id="dataSourceDropdown">
-    			<li id="fb"><a href="#">Facebook</a></li>
-    			<li id="tw"><a href="#">Twitter</a></li>
-  			</ul>
+  		<button class="btn btn-primary btn-sm">Facebook</button>
     	<button onclick="populateTableWithActiveFacebookPages()" type="button" class="btn btn-success btn-sm">Active Pages</button>
     	<button onclick="populateTableWithDeletedFacebookPages()" type="button" class="btn btn-danger btn-sm">Deleted Pages</button>
  	</div>
 		<table class="table table-bordered table-hover" id="dataSourceTable">
 			<thead>
 				<tr>
-					<th><center>Page Name</center></th>
+					<th style="margin: 0 auto;">Page Name</th>
 				</tr>
 			</thead>
 		</table>
@@ -230,11 +186,11 @@
 				$('#dataSourcesModal').modal('hide');
 				$("#dataSourcesModal").trigger('reset');
 				populateTableWithActiveFacebookPages();
-				alert(data);
+				alert("You have succesefully added new page.");
 			},
 			error : function(e) {
 				console.log("ERROR: ", e.responseText);
-				alert(e.responseText);
+				alert("URL that you have entered does not represent a real page. Please go to home page of portal you want to follow and enter URL in form\nwww.facebook.com/pageyouwanttoadd");
 			},
 			done : function(e) {
 				alert("DONE");
@@ -286,17 +242,6 @@
 			}
 		});
 	}
-	
-	$(function() {
-	    $("#dataSourceDropdown").on("click", function() {
-	        var id = this.id;
-	    });
-	    $("#dataSourceDropdown").on("click", "li a", function() {
-	        var pageName = this.innerHTML;
-	        $("#dropDownButton").text(pageName);
-	    });
-	});
-
 </script>
 
 </body>

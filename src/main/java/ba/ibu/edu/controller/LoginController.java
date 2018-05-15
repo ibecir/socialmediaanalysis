@@ -79,7 +79,7 @@ public class LoginController {
 			c.setValue("");
 			response.addCookie(c);
 		}
-		response.sendRedirect("/socialmediaanalysis/");
+		response.sendRedirect("/");
 	}
 
 	@RequestMapping(value = "registration", method = RequestMethod.GET)

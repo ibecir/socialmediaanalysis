@@ -44,7 +44,7 @@ public class PersonController {
 		DataSource ds = new DataSource(person.getId());
 		personDao.addPerson(person);
 		dataSourceDao.addPersonToCollection(ds);
-		return new RedirectView("/socialmediaanalysis/");
+		return new RedirectView("/");
 	}
 
 	@RequestMapping(value = "/sma/person/delete", method = RequestMethod.GET)
@@ -52,6 +52,6 @@ public class PersonController {
 		dataSourceDao.deletePersonFromCollection(new DataSource(person.getId()));
 		personDao.deletePerson(person);
 
-		return new RedirectView("/socialmediaanalysis/person");
+		return new RedirectView("/sma/person");
 	}
 }

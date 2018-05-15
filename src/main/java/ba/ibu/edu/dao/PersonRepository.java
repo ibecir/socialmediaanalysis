@@ -21,8 +21,10 @@ public class PersonRepository {
 	public static final String COLLECTION_NAME = "person";
 
 	public void addPerson(Person person) throws NoSuchAlgorithmException {
+		System.out.println("DOSO DJE TREBA");
 		if (!mongoTemplate.collectionExists(Person.class)) {
 			mongoTemplate.createCollection(Person.class);
+			System.out.println("COLLECTION DOES NOT EXISTS");
 		}
 
 		String password = PasswordConversion.hashPassword(person.getPassword());

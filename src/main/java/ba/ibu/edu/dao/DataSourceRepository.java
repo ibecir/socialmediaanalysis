@@ -27,8 +27,8 @@ public class DataSourceRepository {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	public static final String COLLECTION_NAME = "datasource";
-	public static final String APP_ID = "1053360284704688";
-	public static final String APP_SECRET = "5ff161f28bd46076fbc44a4cabe2b9a9";
+	public static final String APP_ID = "1100467159965965";
+	public static final String APP_SECRET = "98d2599004154fa8624a20e473e0594c";
 
 	public List<DataSource> getAllFacebookPagesWithValidStatusByUserId(String userId) {
 		Query query = new Query();
@@ -75,8 +75,9 @@ public class DataSourceRepository {
 	public boolean isFacebookPageValid(String userId, String url) {
 		AccessToken token = new DefaultFacebookClient(Version.LATEST).obtainAppAccessToken(APP_ID, APP_SECRET);
 		FacebookClient newClient = new DefaultFacebookClient(token.getAccessToken(), Version.LATEST);
-
 		try {
+			System.out.println("BECIR TOKEN");
+			System.out.println(token);
 			int index = url.lastIndexOf('/');
 			String pageName = url.substring(index + 1, url.length());
 			System.out.println(pageName);

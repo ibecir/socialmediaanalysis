@@ -32,9 +32,9 @@ public class CategorizeEngine {
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
-
-	private static final String APP_ID = "1053360284704688";
-	private static final String APP_SECRET = "5ff161f28bd46076fbc44a4cabe2b9a9";
+	//1053360284704688,5ff161f28bd46076fbc44a4cabe2b9a9
+	private static final String APP_ID = "1100467159965965";
+	private static final String APP_SECRET = "98d2599004154fa8624a20e473e0594c";
 	private final String COLLECTION_NAME = "datasource";
 	private final String COLLECTION_NAME_ = "categorizedfeeds";
 	private FacebookClient fbClient;
@@ -42,6 +42,8 @@ public class CategorizeEngine {
 	public CategorizeEngine() {
 		AccessToken token = new DefaultFacebookClient(Version.LATEST).obtainAppAccessToken(APP_ID, APP_SECRET);
 		fbClient = new DefaultFacebookClient(token.getAccessToken(), Version.LATEST);
+		System.out.println("BECIR TOKEN");
+		System.out.println(token);
 	}
 
 	public void setMongoTemplate(MongoTemplate mongoTemplate2) {
@@ -63,6 +65,7 @@ public class CategorizeEngine {
 			System.out.println(dsp.getName());
 			Connection<Post> posts = fbClient.fetchConnection(dsp.getName().concat("/feed"), Post.class);
 			for (List<Post> post : posts) {
+				System.out.println(i + " feeds crawled ############################");
 				for (Post feed : post) {
 					if (j == 1) {
 						lastCrawlFeedId = feed.getId();
@@ -142,14 +145,14 @@ public class CategorizeEngine {
 										}
 									}
 									if (!criteriId.isEmpty()) {
-										feeds.add(new Feed(new UID().toString(), user.getUserId(), comment.getId(), comment.getMessage(), feedKeywords, comment.getCreatedTime(), "facebook.com/".concat(comment.getId()), dsp.getName(), "comment", comment.getFrom().getId(), comment.getFrom().getName(), categoryId, criteriId));
+										feeds.add(new Feed(new UID().toString(), user.getUserId(), comment.getId(), comment.getMessage(), feedKeywords, comment.getCreatedTime(), "facebook.com/".concat(comment.getId()), dsp.getName(), "comment", (comment.getFrom() == null) ? "N/A" : comment.getFrom().getId(), (comment.getFrom() == null) ? "N/A" : comment.getFrom().getName(), categoryId, criteriId));
 										criteriId = new ArrayList<>();
 										categoryId = new ArrayList<>();
 										feedKeywords = new ArrayList<>();
 									} else {
 										categoryId.add("uncategorized");
 										criteriId.add("uncategorized");
-										feeds.add(new Feed(new UID().toString(), user.getUserId(), comment.getId(), comment.getMessage(), feedKeywords, comment.getCreatedTime(), "facebook.com/".concat(comment.getId()), dsp.getName(), "comment", comment.getFrom().getId(), comment.getFrom().getName(), categoryId, criteriId));
+										feeds.add(new Feed(new UID().toString(), user.getUserId(), comment.getId(), comment.getMessage(), feedKeywords, comment.getCreatedTime(), "facebook.com/".concat(comment.getId()), dsp.getName(), "comment", (comment.getFrom() == null) ? "N/A" : comment.getFrom().getId(), (comment.getFrom() == null) ? "N/A" : comment.getFrom().getName(), categoryId, criteriId));
 										criteriId = new ArrayList<>();
 										categoryId = new ArrayList<>();
 										feedKeywords = new ArrayList<>();
@@ -161,8 +164,8 @@ public class CategorizeEngine {
 					i++;
 				}
 			}
-			// setLastCrawledFeed(user.getUserId(), dsp.pageId,
-			// lastCrawlFeedId);
+			 setLastCrawledFeed(user.getUserId(), dsp.pageId,
+			 lastCrawlFeedId);
 		}
 	}
 

@@ -23,4 +23,24 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+  	<filter-name>sitemesh</filter-name>
+  	<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>sitemesh</filter-name>
+  	<url-pattern>/sma/*</url-pattern>
+  </filter-mapping>
+  
+  <welcome-file-list>
+  	<welcome-file>/login.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/login.jsp</location>
+  </error-page>
+  
 </web-app>

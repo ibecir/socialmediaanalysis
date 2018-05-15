@@ -6,51 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Social Media Analysis</title>
-	
-<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
-<link href="<c:url value="/resources/css/navigation-bar.css" />" rel="stylesheet" type="text/css">
-<link href="<c:url value="/resources/css/manage-categories.css" />" rel="stylesheet" type="text/css">
-<link href="<c:url value="/resources/fonts/montserrat.css" />" rel="stylesheet" type="text/css">
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-
 <body>
-
-								<!-- Navigation Bar -->
-							
-<nav class="navbar navbar-default">
-  	<div class="container-fluid">
-    	<div class="navbar-header">
-      		<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user"></span> Welcome <b>${username}</b></a>
-    		<p id="userID" hidden>${userId}</p>
-    	</div>
-    	<div>
-      		<ul class="nav navbar-nav">
-        		<li ><a href="${baseURL}home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        		<li class="dropdown">
-        		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Manage Categories <span class="caret"></span></a>
-        		<ul class="dropdown-menu active" id="manageCategoriesDropdown">
-        			<li id="deletedCategories"><a href="${baseURL}deleted-categories?baseURL=${baseURL}&username=${username}&userId=${userId}">Deleted Categories</a></li>
-        			<li class="active" id="activeCategories"><a>Manage Categories</a></li>
-        		</ul>
-        		</li>
-        		<li><a href="${baseURL}my-categories"><span class="glyphicon glyphicon-signal"></span> My Categories</a></li>
-        		<li><a href="${baseURL}datasources?baseURL=${baseURL}&username=${username}&userId=${userId}"><span class="glyphicon glyphicon-cloud"></span> My Pages</a></li>
-      		</ul>
-      		<ul class="nav navbar-nav navbar-right">
-      			<li><a href="#"><span class="glyphicon glyphicon-off"></span> Sign Out</a></li>
-      		</ul>
-    	</div>
-  	</div>
-</nav>
-
 									<!-- Table -->
-	
 <div class="tocenter">
 	<button style="float: right;" id="btnkeyword" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addKeywordsModal">
 		<span class="glyphicon glyphicon-plus-sign"></span> 
@@ -63,7 +22,7 @@
 		<table class="table table-bordered table-hover" id="keywordTable">
 			<thead>
 				<tr>
-					<th><center><b>${categoryName}</b> category</center></th>
+					<th style="margin: 0 auto;"><b>${categoryName}</b> category</th>
 				</tr>
 			</thead>
 		</table>
@@ -74,7 +33,6 @@
 	<div class="modal fade" id="addKeywordsModal" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
-			<form:form method="post" id="addKeywordForm">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -82,19 +40,18 @@
 					</div>
 					<div class="modal-body">
 							<div class="form-group">
-								<label for="keywords">Title</label> 
+								<label for="addKeywordsTxtArea">Title</label> 
 								<textarea rows="4" cols="70" placeholder="To add more than one keyword separate each one by comma. Ex: First,Second"
-										  class="form-control" id="keywords" required="required"></textarea>
+										  class="form-control" id="addKeywordsTxtArea" required="required"></textarea>
 							</div>
 							<div style="color: red">${error}</div>
 					</div>
 					<div class="modal-footer">
 						<div class="btn-group">
-							<button type="submit" class="btn btn-info" id="btnAddKeyword">Save</button>
+							<button type="button" class="btn btn-info" id="btnAddKeyword" onclick="addkeywords();">Save</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					</div></div>
-			</form:form>
 		</div>
 	</div>
 	
@@ -114,7 +71,7 @@
 					
 					<div class="modal-footer">
 						<div class="btn-group">
-							<button type="submit" class="btn btn-default" id="btnDeleteKategory">Yes</button>
+							<button type="button" class="btn btn-default" id="btnDeleteKategory" onclick="delKeyword();">Yes</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 						</div>
 					</div>
@@ -138,7 +95,7 @@
 					
 					<div class="modal-footer">
 						<div class="btn-group">
-							<button type="submit" class="btn btn-default" id="btnRestoreKeyword">Yes</button>
+							<button type="button" class="btn btn-default" id="btnRestoreKeyword" onclick="restKeyword();">Yes</button>
 							<button type="button" class="btn btn-danger"data-dismiss="modal">No</button>
 						</div>
 					</div>
@@ -148,32 +105,28 @@
 	
 							<!-- Change Keyword Name Modal -->
 							
-	<div class="modal fade topmoved" id="changeKeywordNameModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<form:form method="post" name="changeKeywordNameForm" id="changeKeywordNameForm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"></h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="text" class="form-control" id="newKeywordName"
-							placeholder="Please enter new name for category" required="required">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="btn-group">
-							<button type="submit" class="btn btn-info" id="btnSaveNewKeywordName" >Save</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</form:form>
-		</div>
-	</div>
-	
+<div class="modal fade topmoved" id="changeKeywordNameModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="newKeywordName" placeholder="Please enter new name for category" required="required">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info" id="btnSaveNewKeywordName" onclick="chName();">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 							<!-- Manage Synonyms of Keyword | Main Synonyms Table -->
 							
 	<div class="modal fade" id="mainKeywordSynoymsModal" role="dialog">
@@ -292,7 +245,6 @@
 	<div class="modal fade" id="changeSynonymNameModal" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
-			<form:form method="post" name="changeSynonymNameForm" id="changeSynonymNameForm">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -312,9 +264,11 @@
 						</div>
 					</div>
 				</div>
-			</form:form>
 		</div>
 	</div>
+	
+	<div style="display: none;" id="kidH"></div>
+	<div style="display: none;" id="kidH"></div>
 			
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -394,16 +348,6 @@
 		}
 		
 		jQuery(document).ready(function($) {
-			$("#addKeywordForm").submit(function(keywordEvent) {
-				keywordEvent.preventDefault();
-				addkeywords();
-			});
-			
-			$("#btnSaveNewKeywordName").submit(function(categoryEvent) {
-				categoryEvent.preventDefault();
-				changeKeywordName(elem, id)();
-			});
-			
 			$("#addSynonymsForm").submit(function(synonymEvent) {
 				synonymEvent.preventDefault();
 				addsynonyms();
@@ -413,7 +357,7 @@
 		
 		function addkeywords() {
 			var userId = $("#userID").text();
-			var keywords = $("#keywords").val();
+			var keywords = $("#addKeywordsTxtArea").val();
 			$.ajax({
 				type : "POST",
 				url : "${home}addkeywords?userId=" + userId + "&categoryId=" + "${categoryId}" +"&keywords="+keywords,
@@ -422,7 +366,7 @@
 					console.log("SUCCESS: ", data);
 					$('#addKeywordsModal').modal('hide');
 					populateTableActiveKeywords();
-					$("#addKeywordForm").trigger('reset');
+					document.getElementById("addKeywordsTxtArea").value = "";
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
@@ -436,75 +380,81 @@
 		}
 		
 		function deleteKeyword(id){
-			$("#btnDeleteKategory").click(function(){
-				if (this.id == 'btnDeleteKategory') {
-				$.ajax({
-					type : "POST",
-					url : "${home}deletekeyword?userId=${userId}&categoryId=${categoryId}&keywordId=" + id,
-					timeout : 100000,
-					success : function(data) {
-					$('#deleteKeywordModal').modal('hide');
-					populateTableActiveKeywords();
-					},
-					error : function(e) {
-						console.log("ERROR: ", e);
-					},
-					done : function(e) {
-						alert("DONE");
-						}
-					});
-				}
-			});
-		}	
+			document.getElementById("kidH").innerHtml = id;
+		}
+		
+		function delKeyword(){
+			keywordId = document.getElementById("kidH").innerHtml;
+			$.ajax({
+				type : "POST",
+				url : "${home}deletekeyword?userId=${userId}&categoryId=${categoryId}&keywordId=" + keywordId,
+				timeout : 100000,
+				success : function(data) {
+				$('#deleteKeywordModal').modal('hide');
+				populateTableActiveKeywords();
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				},
+				done : function(e) {
+					alert("DONE");
+					}
+				});
+		}
 		
 		function restoreKeyword(id){
-			$("#btnRestoreKeyword").click(function(){
-				if (this.id == 'btnRestoreKeyword') {
-				$.ajax({
-					type : "POST",
-					url : "${home}restoreKeyword?userId=${userId}&categoryId=${categoryId}&keywordId=" + id,
-					timeout : 100000,
-					success : function(data) {
-						$('#restoreKeywordModal').modal('hide');
-						populateTableDeletedKeywords();
-					},
-					error : function(e) {
-						console.log("ERROR: ", e);
-					},
-					done : function(e) {
-						alert("DONE");
-						}
-					});
-				}
-			});
+			document.getElementById("kidH").innerHtml = id;
 		};
+		
+		function restKeyword(){
+			id = document.getElementById("kidH").innerHtml;
+			
+			$.ajax({
+				type : "POST",
+				url : "${home}restoreKeyword?userId=${userId}&categoryId=${categoryId}&keywordId=" + id,
+				timeout : 100000,
+				success : function(data) {
+					$('#restoreKeywordModal').modal('hide');
+					populateTableDeletedKeywords();
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				},
+				done : function(e) {
+					alert("DONE");
+					}
+				});
+		}
 		
 		function changeKeywordName(elem,id){
 			var keywordHeadertitle= $(elem).closest("tr").find("a.keywordTitle").html();
 			var keywordId= $(elem).closest("tr").find("td.hiddenKeywordId").html();
 			$( "#changeKeywordNameModal" ).find('.modal-title').html('Please enter new name for <b>' + keywordHeadertitle + '</b> keyword');
-			$("#btnSaveNewKeywordName").click(function(keywordEvent) {
-				var keywordNewName = document.getElementById("newKeywordName").value;
-				keywordEvent.preventDefault();
-				$.ajax({
-					type : "POST",
-					url : "${home}keywordName?categoryId=${categoryId}&keywordId=" + keywordId + "&keywordName=" + keywordNewName,
-					timeout : 100000,
-					success : function(data) {
-						console.log("SUCCESS: ", data);
-						$('#changeKeywordNameModal').modal('hide');
-						populateTableActiveKeywords();
-						$("#changeKeywordNameModal").trigger('reset');
-					},
-					error : function(e) {
-						console.log("ERROR: ", e);
-						alert("ERROR");
-					},
-					done : function(e) {
-						alert("DONE");
-						console.log("DONE");
-					}
-				});
+			document.getElementById("kidH").innerHtml = keywordId;
+		}
+		
+		
+		function chName(){
+			keywordId = document.getElementById("kidH").innerHtml;
+			var keywordNewName = document.getElementById("newKeywordName").value;
+			$.ajax({
+				type : "POST",
+				url : "${home}keywordName?categoryId=${categoryId}&keywordId=" + keywordId + "&keywordName=" + keywordNewName,
+				timeout : 100000,
+				success : function(data) {
+					console.log("SUCCESS: ", data);
+					$('#changeKeywordNameModal').modal('hide');
+					populateTableActiveKeywords();
+					$("#changeKeywordNameModal").trigger('reset');
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+					alert("ERROR");
+				},
+				done : function(e) {
+					alert("DONE");
+					console.log("DONE");
+				}
 			});
 		}
 		
@@ -627,8 +577,7 @@
 		function addsynonyms(){
 			var synonyms = $("#synonyms").val();
 			var keywordId= document.getElementById("keyId").innerHTML;
-			alert(keywordId);
-		$.ajax({
+			$.ajax({
 				type : "POST",
 				url : "${home}addsynonyms?userId=${userId}&categoryId=${categoryId}&keywordId=" + keywordId + "&synonyms=" + synonyms,
 				timeout : 100000,
